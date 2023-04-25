@@ -1806,7 +1806,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4870232a158b3c40858fc125e6e0200, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coin: 300
+  coin: 800
   coinText: {fileID: 86369091}
 --- !u!1 &281441637
 GameObject:
@@ -3274,6 +3274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a95308d66aeaa24c9990fa1310a8c4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterMovement: {fileID: 781521070}
   inventoryManager: {fileID: 265920422}
   eqiupmentManager: {fileID: 855085104}
   coinManager: {fileID: 274233273}
@@ -3434,8 +3435,8 @@ GameObject:
   m_Component:
   - component: {fileID: 781521074}
   - component: {fileID: 781521071}
-  - component: {fileID: 781521070}
   - component: {fileID: 781521075}
+  - component: {fileID: 781521070}
   - component: {fileID: 781521076}
   m_Layer: 0
   m_Name: Player
@@ -3456,7 +3457,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 385a3680e967ef745b69dd69eca5d20d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 134
+  canMove: 1
+  speed: 135
   animatorObject: {fileID: 4431395280976711317}
 --- !u!65 &781521071
 BoxCollider:
@@ -3517,7 +3519,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 049e9366980a67346a20c86904732363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interacableObject: {fileID: 0}
   interactButton: {fileID: 699076194}
 --- !u!1 &810209351
 GameObject:
@@ -7667,7 +7668,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5541918614338223193, guid: abc9791d8dbe963419a1e0673007343a, type: 3}
       propertyPath: buyPrice
-      value: 60
+      value: 57
       objectReference: {fileID: 0}
     - target: {fileID: 5541918614338223193, guid: abc9791d8dbe963419a1e0673007343a, type: 3}
       propertyPath: itemMode
@@ -7675,7 +7676,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5541918614338223193, guid: abc9791d8dbe963419a1e0673007343a, type: 3}
       propertyPath: sellPrice
-      value: 45
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 8951282276838990369, guid: abc9791d8dbe963419a1e0673007343a, type: 3}
       propertyPath: m_Name
