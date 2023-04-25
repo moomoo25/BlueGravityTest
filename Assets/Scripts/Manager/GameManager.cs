@@ -40,33 +40,33 @@ public class GameManager : MonoBehaviour
         shopCanvas.gameObject.SetActive(false);
         characterMovement.canMove = true;
     }
-    public void EquipHat(string id,Sprite sprite,string text)
+    public void EquipHat(ItemObject itemObject_)
     {
-        inventoryManager.RemoveItemById(id);
+        inventoryManager.RemoveItemById(itemObject_.id);
         if (inventoryManager.hasHat)
         {
             ItemObject item = eqiupmentManager.GetItemDetail(false);
-            if (id == item.id)
+            if (itemObject_.id == item.id)
             {
                 return;
             }
             
             AddItemToInventory(item);
         }
-        eqiupmentManager.AddHat(id, sprite, text);
+        eqiupmentManager.AddHat(itemObject_);
         inventoryManager.hasHat = true;
     }
-    public void EquipWeapon(string id,Sprite sprite, string text)
+    public void EquipWeapon(ItemObject itemObject_)
     {
-        inventoryManager.RemoveItemById(id);
+        inventoryManager.RemoveItemById(itemObject_.id);
         if (inventoryManager.hasWeapon)
         {
             ItemObject item = eqiupmentManager.GetItemDetail(true);
-            if (id == item.id)
+            if (itemObject_.id == item.id)
                 return;
             AddItemToInventory(item);
         }
-        eqiupmentManager.AddWeapon(id, sprite, text);
+        eqiupmentManager.AddWeapon(itemObject_);
         inventoryManager.hasWeapon = true;
 
     }

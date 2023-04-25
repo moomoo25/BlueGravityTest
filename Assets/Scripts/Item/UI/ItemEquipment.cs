@@ -23,11 +23,12 @@ public class ItemEquipment : Item
         }
 
     }
-    public void IsAdd(string id_,Sprite sprite,string text)
+    public void IsAdd(string id_,Sprite sprite,string text,int sellPrice_)
     {
         id = id_;
         itemImage.sprite = sprite;
         itemTextMeshPro.text = text;
         itemButton.gameObject.SetActive(true);
+        sellPrice = sellPrice_;
     }
 }

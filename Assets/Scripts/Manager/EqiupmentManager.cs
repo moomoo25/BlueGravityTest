@@ -14,13 +14,13 @@ public class EqiupmentManager : MonoBehaviour
     public ItemEquipment hat;
     public ItemEquipment weapon;
     // Start is called before the first frame update
-    public void AddHat(string id,Sprite sprite, string text)
+    public void AddHat(ItemObject itemObject_)
     {
-        hat.IsAdd(id,sprite, text);
+        hat.IsAdd(itemObject_.id, itemObject_.itemImage, itemObject_.itemText,itemObject_.sellPrice);
         hatImage.gameObject.SetActive(true);
-        hatImage.sprite = sprite;
+        hatImage.sprite = itemObject_.itemImage;
         hatRenderer.gameObject.SetActive(true);
-        hatRenderer.sprite = sprite;
+        hatRenderer.sprite = itemObject_.itemImage;
     }
     public void RemoveHat()
     {
@@ -28,13 +28,13 @@ public class EqiupmentManager : MonoBehaviour
         hatImage.gameObject.SetActive(false);
         hatRenderer.gameObject.SetActive(false);
     }
-    public void AddWeapon(string id,Sprite sprite,string text)
+    public void AddWeapon(ItemObject itemObject_)
     {
-        weapon.IsAdd(id,sprite,text);
+        weapon.IsAdd(itemObject_.id, itemObject_.itemImage, itemObject_.itemText,itemObject_.sellPrice);
         weaponImage.gameObject.SetActive(true);
-        weaponImage.sprite = sprite;
+        weaponImage.sprite = itemObject_.itemImage;
         weaponRenderer.gameObject.SetActive(true);
-        weaponRenderer.sprite = sprite;
+        weaponRenderer.sprite = itemObject_.itemImage;
     }
     public void RemoveWeapon()
     {
@@ -51,6 +51,8 @@ public class EqiupmentManager : MonoBehaviour
             item.itemText = hat.itemTextMeshPro.text;
             item.itemMode = hat.itemMode;
             item.itemImage = hat.itemImage.sprite;
+            item.sellPrice = hat.sellPrice;
+            item.buyPrice = hat.buyPrice;
         }
         else
         {
@@ -58,6 +60,8 @@ public class EqiupmentManager : MonoBehaviour
             item.itemText = weapon.itemTextMeshPro.text;
             item.itemImage = weapon.itemImage.sprite;
             item.itemMode = weapon.itemMode;
+            item.sellPrice = weapon.sellPrice;
+            item.buyPrice = weapon.buyPrice;
         }
         item.isValue = false;
         return item;
