@@ -28,6 +28,11 @@ public class ItemShop : Item
             itemButton.GetComponentInChildren<TextMeshProUGUI>().text = "Sell";
         }
     }
+    public override void SetUpItemDetail(string id_, Sprite sprite, string detail, bool isValue, int n, itemMode itemMode_, int sellPrice_, int buyPrice_)
+    {
+        base.SetUpItemDetail(id_, sprite, detail, isValue, n, itemMode_, sellPrice_, buyPrice_);
+        SetUpBuyButton();
+    }
     public override void OnClickItemButton()
     {
         ItemObject itemObject = new ItemObject();
@@ -43,14 +48,16 @@ public class ItemShop : Item
         if (isBuy)
         {
             GameManager.singleton.BuyItem(itemObject);
+            this.id = ""+ Random.Range(0, 100000);
         }
         else
         {
             GameManager.singleton.SellItem(itemObject.id,itemObject.sellPrice);
+            Destroy(this.gameObject);
         }
            
 
-        Destroy(this.gameObject);
+        
     }
  
 }

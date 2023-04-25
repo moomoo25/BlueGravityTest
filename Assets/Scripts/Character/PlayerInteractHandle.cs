@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class PlayerInteractHandle : MonoBehaviour
 {
-    public InteracableObject interacableObject;
+    private InteracableObject interacableObject;
     public GameObject interactButton;
     private Animator buttonAnimator;
     private PlayerInput input = null;

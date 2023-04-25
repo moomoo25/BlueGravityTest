@@ -23,19 +23,20 @@ public class Item : MonoBehaviour
     {
 
     }
-    public void SetUpItemDetail(string id_,Sprite sprite,string detail,bool isValue,int n, itemMode itemMode_,int sellPrice_,int buyPrice_)
+    public virtual void SetUpItemDetail(string id_,Sprite sprite,string detail,bool isValue,int n, itemMode itemMode_,int sellPrice_,int buyPrice_)
     {
         id = id_;
         itemImage.sprite = sprite;
         itemTextMeshPro.text = detail;
+        sellPrice = sellPrice_;
+        buyPrice = buyPrice_;
         itemMode = itemMode_;
         if (isValue == false)
         {
             valueTextMeshPro.gameObject.SetActive(false);
             return;
         }
-        sellPrice = sellPrice_;
-        buyPrice = buyPrice_;
+
 
 
         itemButton.gameObject.SetActive(false);
