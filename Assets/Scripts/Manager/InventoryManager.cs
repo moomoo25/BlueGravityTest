@@ -7,10 +7,12 @@ public class InventoryManager : MonoBehaviour
     private ItemManager itemManager;
     [SerializeField]private ItemManager itemCharacterManager;
     [SerializeField] private ItemManager itemShopManager;
+    [Header("Equipment")]
     public bool hasHat;
     public ItemObject itemHatObject;
     public bool hasWeapon;
     public ItemObject itemWeaponObject;
+    [Header("PlayerItems")]
     public List<ItemObject> items = new List<ItemObject>();
 
     void Awake()
@@ -35,18 +37,20 @@ public class InventoryManager : MonoBehaviour
         }
    
     }
-    public void EnableInventory()
+    public bool EnableInventory()
     {
         inventoryCanvas.SetActive(!inventoryCanvas.activeInHierarchy);
         if (inventoryCanvas.activeInHierarchy)
         {
             itemManager = itemCharacterManager;
             itemManager.OnUpdateItemList();
+            return true;
         }
         else
         {
             itemManager.RemoveAllChild();
             itemManager = itemShopManager;
+            return false;
         }
     }
     public void AddItem(ItemObject item)
@@ -67,6 +71,7 @@ public class InventoryManager : MonoBehaviour
     public void ForceCloseInventory()
     {
         inventoryCanvas.SetActive(false);
-        itemCharacterManager.RemoveAllChild(); 
+        itemCharacterManager.RemoveAllChild();
+        GameManager.singleton.characterMovement.canMove = true;
     }
 }

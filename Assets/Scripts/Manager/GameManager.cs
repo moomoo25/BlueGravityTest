@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class GameManager : MonoBehaviour
 {
     public static GameManager singleton;
+    public CharacterMovement characterMovement;
     public InventoryManager inventoryManager;
     public EqiupmentManager eqiupmentManager;
     public CoinManager coinManager;
@@ -30,12 +31,14 @@ public class GameManager : MonoBehaviour
             inventoryManager.EnableShopPanel(isShopOpen);
            
         }
+        characterMovement.canMove = false;
     }
     public void CloseShop()
     {
         isShopOpen = false;
         inventoryManager.EnableShopPanel(isShopOpen);
         shopCanvas.gameObject.SetActive(false);
+        characterMovement.canMove = true;
     }
     public void EquipHat(string id,Sprite sprite,string text)
     {
@@ -101,7 +104,7 @@ public class GameManager : MonoBehaviour
     {
         if (isShopOpen)
             return;
-        inventoryManager.EnableInventory();
+        characterMovement.canMove = !inventoryManager.EnableInventory();
     }
     public void BuyItem(ItemObject itemObject_)
     {

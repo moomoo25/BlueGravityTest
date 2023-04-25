@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class CharacterMovement : MonoBehaviour
 {
+    public bool canMove;
     public float speed = 12f;
     public Transform animatorObject;
     private PlayerInput input = null;
@@ -33,9 +34,18 @@ public class CharacterMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if (!canMove)
+        {
+            rigid.velocity = new Vector3(0, 0, 0);
+            animator.SetBool("isRun", false);
+            return;
+        }
+           
 
         rigid.velocity = new Vector3(moveVector.x * speed * Time.deltaTime, rigid.velocity.y, moveVector.y * speed * Time.deltaTime);
+
         ChangeScaleLeftRight();
+
         if (moveVector.x != 0 || moveVector.y!=0)
         {
             animator.SetBool("isRun", true);
