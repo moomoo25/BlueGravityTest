@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class ItemManager : MonoBehaviour
 {
-    public GameObject itemPrefab;
+    public GameObject itemCharacterPrefab;
+    public GameObject itemShopPrefab;
     public Transform content;
+    private bool isShop;
     private InventoryManager inventoryManager;
     public void SetUp(InventoryManager inventoryManager_)
     {
@@ -27,7 +29,9 @@ public class ItemManager : MonoBehaviour
 
     public void OnUpdateOneItem(ItemObject item)
     {
-        GameObject g = Instantiate(itemPrefab,transform.position,Quaternion.identity);
+        GameObject slot = GameManager.singleton.isShopOpen? itemShopPrefab:itemCharacterPrefab;
+
+        GameObject g = Instantiate(slot, transform.position,Quaternion.identity);
         g.transform.SetParent(content);
         g.transform.localPosition = Vector3.zero;
         g.transform.localScale = Vector3.one;

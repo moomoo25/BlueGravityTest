@@ -4,9 +4,8 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour
 {
     public GameObject inventoryCanvas;
-    private ItemManager itemManager;
-    [SerializeField]private ItemManager itemCharacterManager;
-    [SerializeField] private ItemManager itemShopManager;
+    public GameObject itemCanvas;
+    [SerializeField] private ItemManager itemManager;
     [Header("Equipment")]
     public bool hasHat;
     public ItemObject itemHatObject;
@@ -18,38 +17,39 @@ public class InventoryManager : MonoBehaviour
     void Awake()
     {
         inventoryCanvas.SetActive(false);
+        itemCanvas.SetActive(false);
     }
     private void Start()
     {
-        itemCharacterManager.SetUp(this);
-        itemShopManager.SetUp(this);
+        itemManager.SetUp(this);
     }
-    public void EnableShopPanel(bool isEnable)
+    public void EnableShopPanel(bool isShopOpen)
     {
-        if (isEnable)
+     
+        if (isShopOpen)
         {
-            itemManager = itemShopManager;
             itemManager.OnUpdateItemList();
+            itemCanvas.SetActive(true);
         }
         else
         {
-            itemManager = itemCharacterManager;
+            itemManager.RemoveAllChild();
+            itemCanvas.SetActive(false);
         }
-   
     }
     public bool EnableInventory()
     {
         inventoryCanvas.SetActive(!inventoryCanvas.activeInHierarchy);
         if (inventoryCanvas.activeInHierarchy)
         {
-            itemManager = itemCharacterManager;
             itemManager.OnUpdateItemList();
+            itemCanvas.SetActive(true);
             return true;
         }
         else
         {
             itemManager.RemoveAllChild();
-            itemManager = itemShopManager;
+            itemCanvas.SetActive(false);
             return false;
         }
     }
@@ -60,6 +60,9 @@ public class InventoryManager : MonoBehaviour
     }
     public void RemoveItemById(string id)
     {
+        if (items.Count == 0)
+            return;
+
         for (int i = 0; i < items.Count; i++)
         {
             if(items[i].id == id)
@@ -70,8 +73,9 @@ public class InventoryManager : MonoBehaviour
     }
     public void ForceCloseInventory()
     {
+        itemCanvas.SetActive(false);
         inventoryCanvas.SetActive(false);
-        itemCharacterManager.RemoveAllChild();
+        itemManager.RemoveAllChild();
         GameManager.singleton.characterMovement.canMove = true;
     }
 }

@@ -9,87 +9,78 @@ public class GameManager : MonoBehaviour
     public CharacterMovement characterMovement;
     public InventoryManager inventoryManager;
     public EqiupmentManager eqiupmentManager;
+    public ShopManager shopManager;
     public CoinManager coinManager;
-    [SerializeField]private GameObject shopCanvas;
     private PlayerInput input = null;
     public bool isShopOpen = false;
     void Awake()
     {
         singleton = this;
-        shopCanvas.gameObject.SetActive(false);
         input = new PlayerInput();
+    }
+    private void Start()
+    {
+        shopManager.SetUp(inventoryManager);
     }
     public void OpenShop()
     {
         if (isShopOpen)
             return;
-        shopCanvas.gameObject.SetActive(true);
         isShopOpen = true;
-        inventoryManager.ForceCloseInventory();
-        if (isShopOpen)
-        {
-            inventoryManager.EnableShopPanel(isShopOpen);
-           
-        }
-        characterMovement.canMove = false;
+        shopManager.OpenShop();
+        characterMovement.canMove = !isShopOpen;
     }
     public void CloseShop()
     {
         isShopOpen = false;
-        inventoryManager.EnableShopPanel(isShopOpen);
-        shopCanvas.gameObject.SetActive(false);
-        characterMovement.canMove = true;
+        shopManager.CloseShop();
+        characterMovement.canMove = !isShopOpen;
     }
-    public void EquipHat(ItemObject itemObject_)
+    public void EquipItem(ItemObject itemObject_)
     {
         inventoryManager.RemoveItemById(itemObject_.id);
-        if (inventoryManager.hasHat)
+        ItemObject item = eqiupmentManager.GetItemDetail(itemObject_.itemMode);
+        eqiupmentManager.AddItemEquipment(itemObject_);
+        if (itemObject_.itemMode == itemMode.Hat)
         {
-            ItemObject item = eqiupmentManager.GetItemDetail(false);
-            if (itemObject_.id == item.id)
-            {
-                return;
-            }
-            
-            AddItemToInventory(item);
-        }
-        eqiupmentManager.AddHat(itemObject_);
-        inventoryManager.hasHat = true;
-    }
-    public void EquipWeapon(ItemObject itemObject_)
-    {
-        inventoryManager.RemoveItemById(itemObject_.id);
-        if (inventoryManager.hasWeapon)
-        {
-            ItemObject item = eqiupmentManager.GetItemDetail(true);
-            if (itemObject_.id == item.id)
-                return;
-            AddItemToInventory(item);
-        }
-        eqiupmentManager.AddWeapon(itemObject_);
-        inventoryManager.hasWeapon = true;
+            if(inventoryManager.hasHat)
+                AddItemToInventory(item);
 
+            inventoryManager.hasHat = true;
+        }
+        else if(itemObject_.itemMode == itemMode.Weapon)
+        {
+            if (inventoryManager.hasWeapon)
+                AddItemToInventory(item);
+
+            inventoryManager.hasWeapon = true;
+        }
+          
     }
     public void AddItemToInventory(ItemObject item_)
     {
         inventoryManager.AddItem(item_);
     }
-    public void RemoveEquipHat()
+    public void RemoveEquipItem(itemMode itemMode_)
     {
-        if (!inventoryManager.hasHat)
-            return;
-        AddItemToInventory(eqiupmentManager.GetItemDetail(false));
-        eqiupmentManager.RemoveHat();
-        inventoryManager.hasHat = false;
+        if (itemMode.Hat == itemMode_)
+        {
+            if (!inventoryManager.hasHat)
+                return;
+            inventoryManager.hasHat = false;
+            AddItemToInventory(eqiupmentManager.GetItemDetail(itemMode_));
+        }
+        else if(itemMode.Weapon == itemMode_)
+        {
+            if (!inventoryManager.hasWeapon)
+                return;
+            inventoryManager.hasWeapon = false;
+            AddItemToInventory(eqiupmentManager.GetItemDetail(itemMode_));
+        }
+        eqiupmentManager.RemoveItem(itemMode_);
+       
     }
-    public void RemoveEquipWeapon()
-    {
-        if (!inventoryManager.hasWeapon)
-            return;
-        AddItemToInventory(eqiupmentManager.GetItemDetail(true));
-        inventoryManager.hasWeapon = false;
-        eqiupmentManager.RemoveWeapon();
-    }
+
     private void OnEnable()
     {
         input.Enable();

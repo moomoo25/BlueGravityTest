@@ -14,38 +14,48 @@ public class EqiupmentManager : MonoBehaviour
     public ItemEquipment hat;
     public ItemEquipment weapon;
     // Start is called before the first frame update
-    public void AddHat(ItemObject itemObject_)
+    public void AddItemEquipment(ItemObject itemObject_)
     {
-        hat.IsAdd(itemObject_.id, itemObject_.itemImage, itemObject_.itemText,itemObject_.sellPrice);
-        hatImage.gameObject.SetActive(true);
-        hatImage.sprite = itemObject_.itemImage;
-        hatRenderer.gameObject.SetActive(true);
-        hatRenderer.sprite = itemObject_.itemImage;
+        if(itemObject_.itemMode == itemMode.Hat)
+        {
+            AddItemEquipmentHandle(hat,hatImage,hatRenderer,itemObject_);
+        }
+        else if(itemObject_.itemMode == itemMode.Weapon)
+        {
+            weapon.IsAdd(itemObject_.id, itemObject_.itemImage, itemObject_.itemText, itemObject_.sellPrice);
+        }
+
     }
-    public void RemoveHat()
+    private void AddItemEquipmentHandle(ItemEquipment itemEquipment, Image image, SpriteRenderer spriteRenderer,ItemObject item)
     {
-        hat.IsRemove();
-        hatImage.gameObject.SetActive(false);
-        hatRenderer.gameObject.SetActive(false);
+        itemEquipment.IsAdd(item.id, item.itemImage, item.itemText, item.sellPrice);
+        image.gameObject.SetActive(true);
+        image.sprite = item.itemImage;
+        spriteRenderer.gameObject.SetActive(true);
+        spriteRenderer.sprite = item.itemImage;
     }
-    public void AddWeapon(ItemObject itemObject_)
+    public void RemoveItem(itemMode itemMode_)
     {
-        weapon.IsAdd(itemObject_.id, itemObject_.itemImage, itemObject_.itemText,itemObject_.sellPrice);
-        weaponImage.gameObject.SetActive(true);
-        weaponImage.sprite = itemObject_.itemImage;
-        weaponRenderer.gameObject.SetActive(true);
-        weaponRenderer.sprite = itemObject_.itemImage;
+        if(itemMode_ == itemMode.Hat)
+        {
+            RemoveItemHandle(hat, hatImage, hatRenderer);
+        }
+        else if(itemMode_ == itemMode.Weapon)
+        {
+            RemoveItemHandle(weapon, weaponImage, weaponRenderer);
+        }
+        print("sda");
     }
-    public void RemoveWeapon()
+    private void RemoveItemHandle(ItemEquipment itemEquipment , Image image , SpriteRenderer spriteRenderer)
     {
-        weapon.IsRemove();
-        weaponImage.gameObject.SetActive(false);
-        weaponRenderer.gameObject.SetActive(false);
+        itemEquipment.IsRemove();
+        image.gameObject.SetActive(false);
+        spriteRenderer.gameObject.SetActive(false);
     }
-    public ItemObject GetItemDetail(bool isWeapon)
+    public ItemObject GetItemDetail(itemMode mode)
     {
         ItemObject item = new ItemObject();
-        if (!isWeapon)
+        if (mode == itemMode.Hat)
         {
             item.id = hat.id;
             item.itemText = hat.itemTextMeshPro.text;

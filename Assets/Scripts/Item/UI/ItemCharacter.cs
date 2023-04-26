@@ -16,15 +16,7 @@ public class ItemCharacter : Item
         itemObject.sellPrice = sellPrice;
         itemObject.buyPrice = buyPrice;
         itemObject.itemMode = itemMode;
-
-        if (itemMode == itemMode.Hat)
-        {
-            GameManager.singleton.EquipHat(itemObject);
-        }
-        else if (itemMode == itemMode.Weapon)
-        {
-            GameManager.singleton.EquipWeapon(itemObject);
-        }
+        GameManager.singleton.EquipItem(itemObject);
         Destroy(this.gameObject);
  
     }
