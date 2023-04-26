@@ -12147,7 +12147,7 @@ GameObject:
   - component: {fileID: 1545164537}
   - component: {fileID: 1545164536}
   m_Layer: 0
-  m_Name: campfire
+  m_Name: Campfire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12569,7 +12569,7 @@ GameObject:
   - component: {fileID: 1601888147}
   - component: {fileID: 1601888146}
   m_Layer: 0
-  m_Name: Ground (1)
+  m_Name: Sea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
