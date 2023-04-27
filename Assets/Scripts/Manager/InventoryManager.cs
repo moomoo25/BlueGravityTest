@@ -25,7 +25,6 @@ public class InventoryManager : MonoBehaviour
     }
     public void EnableShopPanel(bool isShopOpen)
     {
-     
         if (isShopOpen)
         {
             itemManager.OnUpdateItemList();

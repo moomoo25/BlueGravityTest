@@ -5,33 +5,31 @@ using UnityEngine.UI;
 using TMPro;
 public class Item : MonoBehaviour
 {
-    public string id;
-    public TextMeshProUGUI itemTextMeshPro;
     public Image itemImage;
-    public bool isValue;
-    public int number;
+    public TextMeshProUGUI itemTextMeshPro;
     public TextMeshProUGUI valueTextMeshPro;
     public Button itemButton;
-    public int sellPrice;
-    public int buyPrice;
-    public itemMode itemMode;
+    public ItemObject itemObject;
     public virtual void Start()
     {
         itemButton.onClick.AddListener(OnClickItemButton);
     }
+  
     public virtual void OnClickItemButton()
     {
 
     }
-    public virtual void SetUpItemDetail(string id_,Sprite sprite,string detail,bool isValue,int n, itemMode itemMode_,int sellPrice_,int buyPrice_)
+    public virtual void SetUpItemDetail(ItemObject itemObject_)
     {
-        id = id_;
-        itemImage.sprite = sprite;
-        itemTextMeshPro.text = detail;
-        sellPrice = sellPrice_;
-        buyPrice = buyPrice_;
-        itemMode = itemMode_;
-        if (isValue == false)
+        itemObject.id = itemObject_.id;
+        itemImage.sprite = itemObject_.itemImage;
+        itemTextMeshPro.text = itemObject_.itemText;
+        itemObject.itemImage = itemObject_.itemImage;
+        itemObject.itemText = itemObject_.itemText;
+        itemObject.sellPrice = itemObject_.sellPrice;
+        itemObject.buyPrice = itemObject_.buyPrice;
+        itemObject.itemMode = itemObject_.itemMode;
+        if (itemObject_.isValue == false)
         {
             valueTextMeshPro.gameObject.SetActive(false);
             return;
@@ -40,7 +38,7 @@ public class Item : MonoBehaviour
 
 
         itemButton.gameObject.SetActive(false);
-        valueTextMeshPro.text = "" + n;
+        valueTextMeshPro.text = "" + itemObject_.value;
     }
 
 }

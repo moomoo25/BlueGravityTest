@@ -22,13 +22,13 @@ public class EqiupmentManager : MonoBehaviour
         }
         else if(itemObject_.itemMode == itemMode.Weapon)
         {
-            weapon.IsAdd(itemObject_.id, itemObject_.itemImage, itemObject_.itemText, itemObject_.sellPrice);
+            AddItemEquipmentHandle(weapon,weaponImage,weaponRenderer,itemObject_);
         }
 
     }
     private void AddItemEquipmentHandle(ItemEquipment itemEquipment, Image image, SpriteRenderer spriteRenderer,ItemObject item)
     {
-        itemEquipment.IsAdd(item.id, item.itemImage, item.itemText, item.sellPrice);
+        itemEquipment.IsAdd(item);
         image.gameObject.SetActive(true);
         image.sprite = item.itemImage;
         spriteRenderer.gameObject.SetActive(true);
@@ -44,7 +44,6 @@ public class EqiupmentManager : MonoBehaviour
         {
             RemoveItemHandle(weapon, weaponImage, weaponRenderer);
         }
-        print("sda");
     }
     private void RemoveItemHandle(ItemEquipment itemEquipment , Image image , SpriteRenderer spriteRenderer)
     {
@@ -57,23 +56,18 @@ public class EqiupmentManager : MonoBehaviour
         ItemObject item = new ItemObject();
         if (mode == itemMode.Hat)
         {
-            item.id = hat.id;
-            item.itemText = hat.itemTextMeshPro.text;
-            item.itemMode = hat.itemMode;
-            item.itemImage = hat.itemImage.sprite;
-            item.sellPrice = hat.sellPrice;
-            item.buyPrice = hat.buyPrice;
+            item = GetItemDetailHandle(hat);
         }
         else
         {
-            item.id = weapon.id;
-            item.itemText = weapon.itemTextMeshPro.text;
-            item.itemImage = weapon.itemImage.sprite;
-            item.itemMode = weapon.itemMode;
-            item.sellPrice = weapon.sellPrice;
-            item.buyPrice = weapon.buyPrice;
+            item = GetItemDetailHandle(weapon);
         }
         item.isValue = false;
+        return item;
+    }
+    private ItemObject GetItemDetailHandle(ItemEquipment itemEquipment)
+    {
+        ItemObject item = itemEquipment.itemObject;
         return item;
     }
 }

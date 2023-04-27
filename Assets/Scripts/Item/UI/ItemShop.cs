@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 public class ItemShop : Item
 {
-    public bool isBuy;
+    public bool isBuySlot;
     public Color green;
     public Color red;
     public TextMeshProUGUI priceText;
@@ -15,40 +15,31 @@ public class ItemShop : Item
     }
     public void SetUpBuyButton()
     {
-        if (isBuy)
+        if (isBuySlot)
         {
             itemButton.GetComponent<Image>().color = green;
-            priceText.text = "Price:" + buyPrice;
+            priceText.text = "Price:" + itemObject.buyPrice;
             itemButton.GetComponentInChildren<TextMeshProUGUI>().text = "Buy";
         }
         else
         {
             itemButton.GetComponent<Image>().color = red;
-            priceText.text = "Price:" + sellPrice;
+            priceText.text = "Price:" + itemObject.sellPrice;
             itemButton.GetComponentInChildren<TextMeshProUGUI>().text = "Sell";
         }
     }
-    public override void SetUpItemDetail(string id_, Sprite sprite, string detail, bool isValue, int n, itemMode itemMode_, int sellPrice_, int buyPrice_)
+    public override void SetUpItemDetail(ItemObject itemObject_)
     {
-        base.SetUpItemDetail(id_, sprite, detail, isValue, n, itemMode_, sellPrice_, buyPrice_);
+        base.SetUpItemDetail(itemObject_);
         SetUpBuyButton();
     }
     public override void OnClickItemButton()
     {
-        ItemObject itemObject = new ItemObject();
-        itemObject.id = id;
-        itemObject.itemImage = itemImage.sprite;
-        itemObject.itemText = itemTextMeshPro.text;
-        itemObject.isValue = isValue;
-        itemObject.value = number;
-        itemObject.sellPrice = sellPrice;
-        itemObject.buyPrice = buyPrice;
-        itemObject.itemMode = itemMode;
 
-        if (isBuy)
+        if (isBuySlot)
         {
             GameManager.singleton.BuyItem(itemObject);
-            this.id = ""+ Random.Range(0, 100000);
+            //this.id = ""+ Random.Range(0, 100000);
         }
         else
         {

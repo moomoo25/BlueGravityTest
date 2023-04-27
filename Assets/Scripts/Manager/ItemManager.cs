@@ -7,8 +7,11 @@ public class ItemManager : MonoBehaviour
     public GameObject itemCharacterPrefab;
     public GameObject itemShopPrefab;
     public Transform content;
-    private bool isShop;
     private InventoryManager inventoryManager;
+
+    //Shop
+    private bool isShopSlot;
+    [SerializeField] private List<ItemObject> items = new List<ItemObject>();
     public void SetUp(InventoryManager inventoryManager_)
     {
         inventoryManager = inventoryManager_;
@@ -16,22 +19,28 @@ public class ItemManager : MonoBehaviour
 
     public void OnUpdateItemList()
     {
-        List<ItemObject> items = inventoryManager.items;
+        if (inventoryManager != null)
+            items = inventoryManager.items;
+
         if (items.Count == 0)
             return;
 
-      
+
         for (int i = 0; i < items.Count; i++)
         {
             OnUpdateOneItem(items[i]);
         }
     }
-
+    public void SetUpShopItem(List<ItemObject> itemsShop)
+    {
+        isShopSlot = true;
+        items = itemsShop;
+        OnUpdateItemList();
+    }
     public void OnUpdateOneItem(ItemObject item)
     {
-        GameObject slot = GameManager.singleton.isShopOpen? itemShopPrefab:itemCharacterPrefab;
-
-        GameObject g = Instantiate(slot, transform.position,Quaternion.identity);
+        GameObject slot = GameManager.singleton.isShopOpen ? itemShopPrefab : itemCharacterPrefab;
+        GameObject g = Instantiate(slot, transform.position, Quaternion.identity);
         g.transform.SetParent(content);
         g.transform.localPosition = Vector3.zero;
         g.transform.localScale = Vector3.one;
@@ -39,14 +48,14 @@ public class ItemManager : MonoBehaviour
         if (GameManager.singleton.isShopOpen)
         {
             ItemShop itemObject_ = g.GetComponent<ItemShop>();
-            itemObject_.isBuy = false;
+            itemObject_.isBuySlot = isShopSlot?true:false;
             itemObject_.SetUpBuyButton();
-            itemObject_.SetUpItemDetail(item.id, item.itemImage, item.itemText, item.isValue, item.value, item.itemMode, item.sellPrice, item.buyPrice);
+            itemObject_.SetUpItemDetail(item);
         }
-        else
+        else if(GameManager.singleton.isShopOpen==false)
         {
             ItemCharacter itemObject_ = g.GetComponent<ItemCharacter>();
-            itemObject_.SetUpItemDetail(item.id, item.itemImage, item.itemText, item.isValue, item.value, item.itemMode, item.sellPrice, item.buyPrice);
+            itemObject_.SetUpItemDetail(item);
         }
   
     }

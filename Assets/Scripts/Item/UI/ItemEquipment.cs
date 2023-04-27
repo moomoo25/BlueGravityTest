@@ -7,28 +7,35 @@ public class ItemEquipment : Item
     public override void Start()
     {
         itemButton.gameObject.SetActive(false);
+        itemButton.onClick.AddListener(OnClickItemButton);
     }
     public void IsRemove()
     {
         itemButton.gameObject.SetActive(false);
         itemImage.sprite = null;
    
-        if (itemMode == itemMode.Hat)
+        if (itemObject.itemMode == itemMode.Hat)
         {
             itemTextMeshPro.text = "No Hat";
         }
-        else if (itemMode == itemMode.Weapon)
+        else if (itemObject.itemMode == itemMode.Weapon)
         {
             itemTextMeshPro.text = "No Weapon";
         }
-
+        
     }
-    public void IsAdd(string id_,Sprite sprite,string text,int sellPrice_)
+    public override void OnClickItemButton()
     {
-        id = id_;
-        itemImage.sprite = sprite;
-        itemTextMeshPro.text = text;
+        GameManager.singleton.RemoveEquipItem(itemObject.itemMode);
+        IsRemove();
+      
+    }
+    public void IsAdd(ItemObject itemObject_)
+    {
+        itemObject = itemObject_;
+        itemImage.sprite = itemObject_.itemImage;
+        itemTextMeshPro.text = itemObject_.itemText;
         itemButton.gameObject.SetActive(true);
-        sellPrice = sellPrice_;
+        itemObject.sellPrice = itemObject_.sellPrice;
     }
 }
