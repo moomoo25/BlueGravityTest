@@ -11,3 +11,4 @@ Done!
 Buy item with gold from a merchant.
 This is the result [VDO](https://pages.github.com/)
 </pre>
+This site was built using [GitHub Pages](https://pages.github.com/).
