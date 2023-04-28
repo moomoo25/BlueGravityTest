@@ -104,6 +104,10 @@ public class GameManager : MonoBehaviour
         {
             AddItemToInventory(itemObject_); 
         }
+
+        if (itemObject_.isBuyOnce){
+            shopManager.RemoveItemFromShop(itemObject_.itemId);
+        }
     }
     public void SellItem(string id,int price)
     {

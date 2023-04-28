@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ItemCharacter : Item
 {
- 
     public override void OnClickItemButton()
     {
         GameManager.singleton.EquipItem(itemObject);
@@ -12,3 +11,4 @@ public class ItemCharacter : Item
  
     }
 }
+

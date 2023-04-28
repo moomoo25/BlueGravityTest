@@ -18,13 +18,13 @@ public class ItemShop : Item
         if (isBuySlot)
         {
             itemButton.GetComponent<Image>().color = green;
-            priceText.text = "Price:" + itemObject.buyPrice;
+            priceText.text = "Price: " + itemObject.buyPrice;
             itemButton.GetComponentInChildren<TextMeshProUGUI>().text = "Buy";
         }
         else
         {
             itemButton.GetComponent<Image>().color = red;
-            priceText.text = "Price:" + itemObject.sellPrice;
+            priceText.text = "Price: " + itemObject.sellPrice;
             itemButton.GetComponentInChildren<TextMeshProUGUI>().text = "Sell";
         }
     }
@@ -39,7 +39,8 @@ public class ItemShop : Item
         if (isBuySlot)
         {
             GameManager.singleton.BuyItem(itemObject);
-            //this.id = ""+ Random.Range(0, 100000);
+                if (itemObject.isBuyOnce)
+                    Destroy(this.gameObject);
         }
         else
         {

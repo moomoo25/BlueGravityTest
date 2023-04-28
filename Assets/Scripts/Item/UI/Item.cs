@@ -22,6 +22,7 @@ public class Item : MonoBehaviour
     public virtual void SetUpItemDetail(ItemObject itemObject_)
     {
         itemObject.id = itemObject_.id;
+        itemObject.itemId = itemObject_.itemId;
         itemImage.sprite = itemObject_.itemImage;
         itemTextMeshPro.text = itemObject_.itemText;
         itemObject.itemImage = itemObject_.itemImage;
@@ -29,13 +30,13 @@ public class Item : MonoBehaviour
         itemObject.sellPrice = itemObject_.sellPrice;
         itemObject.buyPrice = itemObject_.buyPrice;
         itemObject.itemMode = itemObject_.itemMode;
+        itemObject.isBuyOnce = itemObject_.isBuyOnce;
+
         if (itemObject_.isValue == false)
         {
             valueTextMeshPro.gameObject.SetActive(false);
             return;
         }
-
-
 
         itemButton.gameObject.SetActive(false);
         valueTextMeshPro.text = "" + itemObject_.value;

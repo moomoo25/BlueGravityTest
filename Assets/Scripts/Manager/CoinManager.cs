@@ -22,7 +22,6 @@ public class CoinManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("cant buy");
             return false;
         }
        

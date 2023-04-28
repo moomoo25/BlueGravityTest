@@ -2457,22 +2457,26 @@ MonoBehaviour:
   hasHat: 0
   itemHatObject:
     id: 
+    itemId: 
     itemImage: {fileID: 0}
     itemText: 
     isValue: 0
     value: 0
     sellPrice: 0
     buyPrice: 0
+    isBuyOnce: 0
     itemMode: 0
   hasWeapon: 0
   itemWeaponObject:
     id: 
+    itemId: 
     itemImage: {fileID: 0}
     itemText: 
     isValue: 0
     value: 0
     sellPrice: 0
     buyPrice: 0
+    isBuyOnce: 0
     itemMode: 0
   items: []
 --- !u!1 &274233271
@@ -13289,6 +13293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10718d0912ae2334bba29c6b05b63314, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  merchantInteract: {fileID: 0}
   shopCanvas: {fileID: 1309617116}
   itemManager: {fileID: 1625977415}
   ItemObjectData: {fileID: 11400000, guid: 1f6fd4fc0d0ad144b8ba5e4591077e49, type: 2}
@@ -15583,7 +15588,7 @@ GameObject:
   - component: {fileID: 152994908}
   - component: {fileID: 95000010813978277}
   m_Layer: 0
-  m_Name: Merchant
+  m_Name: MerchantShop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16348,11 +16353,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecd8d9f23954d45469f1bf04bd88895c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items:
-  - sword
-  - shield
-  - diamond_hat
-  - metal_hat
+  shopItems:
+  - itemId: sword
+    isBuyOnce: 0
+  - itemId: shield
+    isBuyOnce: 0
+  - itemId: metal_hat
+    isBuyOnce: 0
+  - itemId: diamond_hat
+    isBuyOnce: 1
 --- !u!212 &212000009864973852
 SpriteRenderer:
   m_ObjectHideFlags: 0

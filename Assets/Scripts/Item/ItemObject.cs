@@ -7,12 +7,14 @@ using UnityEngine.UI;
 public class ItemObject 
 {
     public string id;
+    public string itemId;
     public Sprite itemImage;
     public string itemText;
     public bool isValue;
     public int value;
     public int sellPrice;
     public int buyPrice;
+    public bool isBuyOnce;
     public itemMode itemMode = itemMode.Consumer;
 }
 public enum itemMode
