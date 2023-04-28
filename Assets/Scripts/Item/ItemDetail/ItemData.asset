@@ -57,8 +57,8 @@ MonoBehaviour:
       itemText: Good apple
       isValue: 1
       value: 1
-      sellPrice: 8
-      buyPrice: 5
+      sellPrice: 5
+      buyPrice: 8
       isBuyOnce: 0
       itemMode: 0
   - itemId: metal_hat
