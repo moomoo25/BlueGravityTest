@@ -1,4 +1,5 @@
 # Buy/Sell/Equip Items
+<pre>
 How to use
 1.Attach merchantInteract.cs to gameobject with collider.
 2.Setup item detail in ItemData scriptableobject.
@@ -9,3 +10,4 @@ How to use
 Done!
 Buy item with gold from a merchant.
 Result: https://www.youtube.com/watch?v=NtrKw4dKW_E
+</pre>
