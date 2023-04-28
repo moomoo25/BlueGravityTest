@@ -11,4 +11,4 @@ Done!
 Buy item with gold from a merchant.
 (https://pages.github.com/)
 </pre>
-This is the result [VDO] (https://youtu.be/NtrKw4dKW_E)
+This is the result [VDO](https://youtu.be/NtrKw4dKW_E)
