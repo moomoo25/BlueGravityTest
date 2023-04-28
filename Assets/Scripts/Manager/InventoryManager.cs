@@ -54,21 +54,69 @@ public class InventoryManager : MonoBehaviour
     }
     public void AddItem(ItemObject item)
     {
+        bool isStack = ItemStackHandle(item);
+
+        if (isStack)
+        {
+            itemManager.OnUpdateValueItem(item,false);
+            return;
+        }
+
         items.Add(item);
         itemManager.OnUpdateOneItem(item);
     }
-    public void RemoveItemById(string id)
+    public void RemoveItemById(ItemObject item_)
     {
         if (items.Count == 0)
             return;
 
         for (int i = 0; i < items.Count; i++)
         {
-            if(items[i].id == id)
+            if(items[i].isValue)
+            {
+                items[i].value--;
+                if (items[i].value <= 0)
+                {
+                    items.RemoveAt(i);
+                    itemManager.OnUpdateValueItem(item_, true);
+                }
+                else
+                {
+                    itemManager.OnUpdateValueItem(item_,true);
+                }
+                return;
+            }
+
+            if(items[i].id == item_.id)
             {
                 items.RemoveAt(i);
             }
         }
+    }
+    private bool ItemStackHandle(ItemObject item)
+    {
+        bool isStack = false;
+        if (item.isValue)
+        {
+            for (int i = 0; i < items.Count; i++)
+            {
+                if (items[i].itemId == item.itemId)
+                {
+                    isStack = true;
+                    if (items[i].value == 0)
+                    {
+                        items[i].value = 1;
+                        isStack = false;
+                    }
+                    else
+                    {
+                        items[i].value++;
+                    }
+                }
+            }
+
+        }
+        return isStack;
     }
     public void ForceCloseInventory()
     {

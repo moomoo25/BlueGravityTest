@@ -15,41 +15,61 @@ MonoBehaviour:
   itemObjectData:
   - itemId: sword
     itemObject:
-      id: 85057
+      id: 59867
+      itemId: sword
       itemImage: {fileID: 21300000, guid: b122ecf1aeafa9044b2a9b22057d7c13, type: 3}
       itemText: Deadly sword
       isValue: 0
       value: 0
       sellPrice: 30
       buyPrice: 50
+      isBuyOnce: 0
       itemMode: 2
   - itemId: shield
     itemObject:
-      id: 77568
+      id: 74743
+      itemId: shield
       itemImage: {fileID: 21300000, guid: 89aa73c639361754abb21b095959a144, type: 3}
       itemText: Shield
       isValue: 0
       value: 0
       sellPrice: 26
       buyPrice: 46
+      isBuyOnce: 0
       itemMode: 2
   - itemId: diamond_hat
     itemObject:
-      id: 73046
+      id: 55289
+      itemId: diamond_hat
       itemImage: {fileID: 21300000, guid: 9539f32de0bb8104c963751ebd4badb2, type: 3}
       itemText: Diamond hat
       isValue: 0
       value: 0
       sellPrice: 100
       buyPrice: 120
+      isBuyOnce: 1
       itemMode: 1
+  - itemId: apple
+    itemObject:
+      id: 8523
+      itemId: apple
+      itemImage: {fileID: 21300000, guid: 193f7e4854d287042931824a548e1755, type: 3}
+      itemText: Good apple
+      isValue: 1
+      value: 1
+      sellPrice: 8
+      buyPrice: 5
+      isBuyOnce: 0
+      itemMode: 0
   - itemId: metal_hat
     itemObject:
-      id: 84252
+      id: 85720
+      itemId: metal_hat
       itemImage: {fileID: 21300000, guid: ecb042df336c4f54b8cb2660c3216086, type: 3}
       itemText: Metal hat
       isValue: 0
       value: 0
       sellPrice: 30
       buyPrice: 50
+      isBuyOnce: 0
       itemMode: 1

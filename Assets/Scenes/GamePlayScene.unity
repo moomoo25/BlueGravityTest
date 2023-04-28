@@ -15588,7 +15588,7 @@ GameObject:
   - component: {fileID: 152994908}
   - component: {fileID: 95000010813978277}
   m_Layer: 0
-  m_Name: MerchantShop
+  m_Name: MerchantShopInteract
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16362,6 +16362,8 @@ MonoBehaviour:
     isBuyOnce: 0
   - itemId: diamond_hat
     isBuyOnce: 1
+  - itemId: apple
+    isBuyOnce: 0
 --- !u!212 &212000009864973852
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -17869,7 +17871,7 @@ GameObject:
   - component: {fileID: 7451416721055190685}
   - component: {fileID: 7451416721055190687}
   m_Layer: 0
-  m_Name: Dog
+  m_Name: DogInteract
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -36,9 +36,13 @@ public class GameManager : MonoBehaviour
         shopManager.CloseShop();
         characterMovement.canMove = !isShopOpen;
     }
+    public void ConsumeItem(ItemObject itemObject)
+    {
+        inventoryManager.RemoveItemById(itemObject);
+    }
     public void EquipItem(ItemObject itemObject_)
     {
-        inventoryManager.RemoveItemById(itemObject_.id);
+        inventoryManager.RemoveItemById(itemObject_);
         ItemObject item = eqiupmentManager.GetItemDetail(itemObject_.itemMode);
         eqiupmentManager.AddItemEquipment(itemObject_);
         if (itemObject_.itemMode == itemMode.Hat)
@@ -109,9 +113,9 @@ public class GameManager : MonoBehaviour
             shopManager.RemoveItemFromShop(itemObject_.itemId);
         }
     }
-    public void SellItem(string id,int price)
+    public void SellItem(ItemObject itemObject)
     {
-        inventoryManager.RemoveItemById(id);
-        coinManager.SellItem(price);
+        inventoryManager.RemoveItemById(itemObject);
+        coinManager.SellItem(itemObject.sellPrice);
     }
 }

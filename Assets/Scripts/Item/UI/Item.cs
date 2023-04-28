@@ -9,15 +9,21 @@ public class Item : MonoBehaviour
     public TextMeshProUGUI itemTextMeshPro;
     public TextMeshProUGUI valueTextMeshPro;
     public Button itemButton;
+    private TextMeshProUGUI itemButtonText;
     public ItemObject itemObject;
     public virtual void Start()
     {
         itemButton.onClick.AddListener(OnClickItemButton);
+        itemButtonText = itemButton.GetComponentInChildren<TextMeshProUGUI>();
     }
   
     public virtual void OnClickItemButton()
     {
 
+    }
+    public TextMeshProUGUI GetItemButtonText()
+    {
+        return itemButtonText;
     }
     public virtual void SetUpItemDetail(ItemObject itemObject_)
     {
@@ -31,15 +37,23 @@ public class Item : MonoBehaviour
         itemObject.buyPrice = itemObject_.buyPrice;
         itemObject.itemMode = itemObject_.itemMode;
         itemObject.isBuyOnce = itemObject_.isBuyOnce;
-
-        if (itemObject_.isValue == false)
+        itemObject.isValue = itemObject_.isValue;
+        itemObject.value = itemObject_.value;
+        if (itemObject.isValue == false)
         {
             valueTextMeshPro.gameObject.SetActive(false);
             return;
         }
 
-        itemButton.gameObject.SetActive(false);
-        valueTextMeshPro.text = "" + itemObject_.value;
+        itemButton.gameObject.SetActive(true);
+        valueTextMeshPro.text = "x " + itemObject_.value;
+    }
+    public void UpdateValue(int v)
+    {
+        itemObject.value = v;
+        valueTextMeshPro.text = "x " + v;
+        if (v == 0)
+            Destroy(this.gameObject);
     }
 
 }

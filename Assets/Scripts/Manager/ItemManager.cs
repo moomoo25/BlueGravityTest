@@ -45,6 +45,14 @@ public class ItemManager : MonoBehaviour
         g.transform.localPosition = Vector3.zero;
         g.transform.localScale = Vector3.one;
 
+        if (item.isValue)
+        {
+            if (item.value == 0)
+            {
+                item.value = 1;
+            }
+        }
+      
         if (GameManager.singleton.isShopOpen)
         {
             ItemShop itemObject_ = g.GetComponent<ItemShop>();
@@ -58,6 +66,21 @@ public class ItemManager : MonoBehaviour
             itemObject_.SetUpItemDetail(item);
         }
   
+    }
+    public void OnUpdateValueItem(ItemObject item,bool isRemove)
+    {
+        Item[] itemsContent = content.GetComponentsInChildren<Item>();
+        for (int i = 0; i < itemsContent.Length; i++)
+        {
+            if (itemsContent[i].itemObject.itemId == item.itemId)
+            {
+                if (isRemove)
+                    item.value--;
+
+                itemsContent[i].UpdateValue(item.value);
+            }
+        }
+
     }
     public void RemoveAllChild()
     {

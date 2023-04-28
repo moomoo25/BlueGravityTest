@@ -20,12 +20,14 @@ public class ItemShop : Item
             itemButton.GetComponent<Image>().color = green;
             priceText.text = "Price: " + itemObject.buyPrice;
             itemButton.GetComponentInChildren<TextMeshProUGUI>().text = "Buy";
+            valueTextMeshPro.gameObject.SetActive(false);
         }
         else
         {
             itemButton.GetComponent<Image>().color = red;
             priceText.text = "Price: " + itemObject.sellPrice;
             itemButton.GetComponentInChildren<TextMeshProUGUI>().text = "Sell";
+         
         }
     }
     public override void SetUpItemDetail(ItemObject itemObject_)
@@ -44,7 +46,17 @@ public class ItemShop : Item
         }
         else
         {
-            GameManager.singleton.SellItem(itemObject.id,itemObject.sellPrice);
+            GameManager.singleton.SellItem(itemObject);
+            if (itemObject.isValue)
+            {
+               
+                int a = itemObject.value;
+                if ( a >= 0)
+                {
+                    return;
+                }
+
+            }
             Destroy(this.gameObject);
         }
            
