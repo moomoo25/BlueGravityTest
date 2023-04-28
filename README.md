@@ -9,6 +9,5 @@ How to use
 6.Click Unequip button to remove item from the player.
 Done!
 Buy item with gold from a merchant.
-(https://pages.github.com/)
 </pre>
 This is the result [VDO](https://youtu.be/NtrKw4dKW_E)
