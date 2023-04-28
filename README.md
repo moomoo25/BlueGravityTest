@@ -7,4 +7,4 @@ How to use
 5.Press I then click E button to equip your item.
 Done!
 Buy item with gold from a merchant.
-Result: https://www.youtube.com/watch?v=ANXNLFItZl4
+Result: https://www.youtube.com/watch?v=NtrKw4dKW_E
