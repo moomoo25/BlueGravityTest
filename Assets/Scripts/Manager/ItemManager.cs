@@ -25,7 +25,6 @@ public class ItemManager : MonoBehaviour
         if (items.Count == 0)
             return;
 
-
         for (int i = 0; i < items.Count; i++)
         {
             OnUpdateOneItem(items[i]);
@@ -44,8 +43,7 @@ public class ItemManager : MonoBehaviour
         g.transform.SetParent(content);
         g.transform.localPosition = Vector3.zero;
         g.transform.localScale = Vector3.one;
-
-        if (item.isValue)
+        if (item.itemMode == itemMode.Consumer)
         {
             if (item.value == 0)
             {

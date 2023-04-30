@@ -8,9 +8,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private ItemManager itemManager;
     [Header("Equipment")]
     public bool hasHat;
-    public ItemObject itemHatObject;
     public bool hasWeapon;
-    public ItemObject itemWeaponObject;
     [Header("PlayerItems")]
     public List<ItemObject> items = new List<ItemObject>();
 
@@ -52,7 +50,7 @@ public class InventoryManager : MonoBehaviour
             return false;
         }
     }
-    public void AddItem(ItemObject item)
+    public void AddItem(ItemObject item , bool isGenerateId)
     {
         bool isStack = ItemStackHandle(item);
 
@@ -61,9 +59,31 @@ public class InventoryManager : MonoBehaviour
             itemManager.OnUpdateValueItem(item,false);
             return;
         }
+     
 
-        items.Add(item);
-        itemManager.OnUpdateOneItem(item);
+            ItemObject item_ = new ItemObject();
+            if (isGenerateId)
+            {
+                item_.id = UniqueIdManager.singleton.GetUniqueId();
+            }
+            else
+            {
+                item_.id = item.id;
+            }
+        
+            item_.itemId = item.itemId;
+            item_.itemImage = item.itemImage;
+            item_.itemText = item.itemText;
+            item_.value = item.value;
+            item_.buyPrice = item.buyPrice;
+            item_.sellPrice = item.sellPrice;
+            item_.isBuyOnce = item.isBuyOnce;
+            item_.itemMode = item.itemMode;
+            items.Add(item_);
+            itemManager.OnUpdateOneItem(item_);
+     
+
+    
     }
     public void RemoveItemById(ItemObject item_)
     {
@@ -72,7 +92,7 @@ public class InventoryManager : MonoBehaviour
 
         for (int i = 0; i < items.Count; i++)
         {
-            if(items[i].isValue)
+            if(items[i].itemMode==itemMode.Consumer)
             {
                 items[i].value--;
                 if (items[i].value <= 0)
@@ -96,7 +116,7 @@ public class InventoryManager : MonoBehaviour
     private bool ItemStackHandle(ItemObject item)
     {
         bool isStack = false;
-        if (item.isValue)
+        if (item.itemMode == itemMode.Consumer)
         {
             for (int i = 0; i < items.Count; i++)
             {

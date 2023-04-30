@@ -8,7 +8,7 @@ public class ItemCharacter : Item
     {
         base.Start();
 
-        if (itemObject.isValue)
+        if (itemObject.itemMode == itemMode.Consumer)
         {
             GetItemButtonText().text = "Consume";
         }
@@ -19,7 +19,7 @@ public class ItemCharacter : Item
     }
     public override void OnClickItemButton()
     {
-        if (!itemObject.isValue)
+        if (itemObject.itemMode != itemMode.Consumer)
         {
             GameManager.singleton.EquipItem(itemObject);
             Destroy(this.gameObject);
@@ -27,7 +27,8 @@ public class ItemCharacter : Item
         else
         {
             GameManager.singleton.ConsumeItem(itemObject);
-            if (itemObject.isValue)
+
+            if (itemObject.itemMode == itemMode.Consumer)
             {
                 int a = itemObject.value;
                 if (a >= 0)

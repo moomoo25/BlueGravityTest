@@ -1,26 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
+
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager singleton;
     public CharacterMovement characterMovement;
     public InventoryManager inventoryManager;
+    public InventoryController inventoryController;
     public EqiupmentManager eqiupmentManager;
     public ShopManager shopManager;
     public CoinManager coinManager;
-    private PlayerInput input = null;
     public bool isShopOpen = false;
     void Awake()
     {
         singleton = this;
-        input = new PlayerInput();
+
     }
     private void Start()
     {
         shopManager.SetUp(inventoryManager);
+        inventoryController.SetUp(characterMovement, inventoryManager);
     }
     public void OpenShop()
     {
@@ -48,22 +49,22 @@ public class GameManager : MonoBehaviour
         if (itemObject_.itemMode == itemMode.Hat)
         {
             if(inventoryManager.hasHat)
-                AddItemToInventory(item);
+                AddItemToInventory(item,false);
 
             inventoryManager.hasHat = true;
         }
         else if(itemObject_.itemMode == itemMode.Weapon)
         {
             if (inventoryManager.hasWeapon)
-                AddItemToInventory(item);
+                AddItemToInventory(item,false);
 
             inventoryManager.hasWeapon = true;
         }
           
     }
-    public void AddItemToInventory(ItemObject item_)
+    public void AddItemToInventory(ItemObject item_,bool isGenerateId)
     {
-        inventoryManager.AddItem(item_);
+        inventoryManager.AddItem(item_, isGenerateId);
     }
     public void RemoveEquipItem(itemMode itemMode_)
     {
@@ -72,41 +73,27 @@ public class GameManager : MonoBehaviour
             if (!inventoryManager.hasHat)
                 return;
             inventoryManager.hasHat = false;
-            AddItemToInventory(eqiupmentManager.GetItemDetail(itemMode_));
+            AddItemToInventory(eqiupmentManager.GetItemDetail(itemMode_),false);
         }
         else if(itemMode.Weapon == itemMode_)
         {
             if (!inventoryManager.hasWeapon)
                 return;
             inventoryManager.hasWeapon = false;
-            AddItemToInventory(eqiupmentManager.GetItemDetail(itemMode_));
+            AddItemToInventory(eqiupmentManager.GetItemDetail(itemMode_),false);
         }
         eqiupmentManager.RemoveItem(itemMode_);
        
     }
 
-    private void OnEnable()
-    {
-        input.Enable();
-        input.Player.Inventory.performed += OnInventoryPerformed;
-    }
-    private void OnDisable()
-    {
-        input.Disable();
-        input.Player.Inventory.performed -= OnInventoryPerformed;
-    }
-    private void OnInventoryPerformed(InputAction.CallbackContext value)
-    {
-        if (isShopOpen)
-            return;
-        characterMovement.canMove = !inventoryManager.EnableInventory();
-    }
+   
     public void BuyItem(ItemObject itemObject_)
     {
       bool isBuy= coinManager.BuyItem(itemObject_.buyPrice);
         if (isBuy)
         {
-            AddItemToInventory(itemObject_); 
+
+            AddItemToInventory(itemObject_,true); 
         }
 
         if (itemObject_.isBuyOnce){

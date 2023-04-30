@@ -10,7 +10,6 @@ public class ItemObject
     public string itemId;
     public Sprite itemImage;
     public string itemText;
-    public bool isValue;
     public int value;
     public int sellPrice;
     public int buyPrice;

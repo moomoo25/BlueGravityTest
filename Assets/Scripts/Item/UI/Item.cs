@@ -11,6 +11,10 @@ public class Item : MonoBehaviour
     public Button itemButton;
     private TextMeshProUGUI itemButtonText;
     public ItemObject itemObject;
+    private void Awake()
+    {
+        
+    }
     public virtual void Start()
     {
         itemButton.onClick.AddListener(OnClickItemButton);
@@ -37,9 +41,9 @@ public class Item : MonoBehaviour
         itemObject.buyPrice = itemObject_.buyPrice;
         itemObject.itemMode = itemObject_.itemMode;
         itemObject.isBuyOnce = itemObject_.isBuyOnce;
-        itemObject.isValue = itemObject_.isValue;
+        //itemObject.isValue = itemObject_.isValue;
         itemObject.value = itemObject_.value;
-        if (itemObject.isValue == false)
+        if (itemObject.itemMode != itemMode.Consumer)
         {
             valueTextMeshPro.gameObject.SetActive(false);
             return;

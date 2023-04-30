@@ -9,10 +9,7 @@ public class ItemShop : Item
     public Color green;
     public Color red;
     public TextMeshProUGUI priceText;
-    void Awake()
-    {
-        SetUpBuyButton();
-    }
+  
     public void SetUpBuyButton()
     {
         if (isBuySlot)
@@ -47,7 +44,7 @@ public class ItemShop : Item
         else
         {
             GameManager.singleton.SellItem(itemObject);
-            if (itemObject.isValue)
+            if (itemObject.itemMode == itemMode.Consumer)
             {
                
                 int a = itemObject.value;

@@ -62,7 +62,7 @@ public class EqiupmentManager : MonoBehaviour
         {
             item = GetItemDetailHandle(weapon);
         }
-        item.isValue = false;
+       // item.isValue = false;
         return item;
     }
     private ItemObject GetItemDetailHandle(ItemEquipment itemEquipment)

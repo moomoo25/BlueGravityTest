@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 
 [CreateAssetMenu(fileName = "ItemData", menuName = "ScriptableObjects/ItemDetailScriptableObject", order = 1)]
 public class ItemDetailScriptableObject : ScriptableObject
@@ -17,9 +17,11 @@ public class ItemDetailScriptableObject : ScriptableObject
                 itemObject = itemObjectData[i].itemObject;
             }
         }
-        itemObject.id = "" + Random.Range(0, 100000);
+       
+   
         return itemObject;
     }
+
 }
 
 [System.Serializable]
